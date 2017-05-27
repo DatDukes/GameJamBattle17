@@ -31,24 +31,19 @@ public class Light2D : MonoBehaviour
 
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
-        //material = new Material(Shader.Find("Sprites/Default"));
-        //material.SetColor("_Color", color);
-        //meshRenderer.sharedMaterial = material;
-
     }
 
     private void Update()
     {
         mask = 0 | cullingMask;
         range = Mathf.Clamp(range, 0, range);
-       // material.SetColor("_Color", color);
 
         segments = Mathf.RoundToInt(angle * 10);
         vertexs = new Vector3[segments + 1];
         vertexs[0] = transform.InverseTransformPoint(transform.position);
 
         int count = 1;
-        for (float i = -transform.localEulerAngles.z; i <= -transform.localEulerAngles.z + angle; i ++)
+        for (float i = -transform.eulerAngles.z; i <= -transform.eulerAngles.z + angle; i ++)
         {
             Vector2 direction = reverseDiretion ?
                 new Vector2(Mathf.Cos(Mathf.Deg2Rad * i), Mathf.Sin(Mathf.Deg2Rad * i))

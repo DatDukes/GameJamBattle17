@@ -10,7 +10,6 @@ public class PlayerScript : MonoBehaviour {
     Light2D _light;
     animationState animState;
     Camera _cam;
-    MeshCollider _col;
     float _speed;
     float _remainingLight;
     bool _running;
@@ -37,7 +36,6 @@ public class PlayerScript : MonoBehaviour {
         _rb = GetComponent<Rigidbody2D>();
         _cam = GetComponentInChildren<Camera>();
         _light = GetComponentInChildren<Light2D>();
-        _col = _light.GetComponent<MeshCollider>();
         _anim = GetComponentInChildren<Animator>();
         _remainingLight = _maxLight;
         animState = animationState.Idle;
@@ -48,7 +46,6 @@ public class PlayerScript : MonoBehaviour {
         LightUpdate();
         AnimationManager();
         CameraManagement();
-        _col.sharedMesh = _col.GetComponent<MeshFilter>().mesh;
     }
 
     void MovementUpdate() {

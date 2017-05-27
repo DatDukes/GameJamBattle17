@@ -52,7 +52,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4917653952026866}
   - component: {fileID: 61030641480182310}
-  - component: {fileID: 114869428680385202}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -69,6 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4082997589188390}
   - component: {fileID: 61569041878593372}
+  - component: {fileID: 114191206681403978}
   m_Layer: 8
   m_Name: Trigger
   m_TagString: Untagged
@@ -193,12 +193,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.65, y: 0.65, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114869428680385202
+--- !u!114 &114191206681403978
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1564215588677188}
+  m_GameObject: {fileID: 1683918561976956}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8ceb150d06843f459222d69c67dbf63, type: 3}
