@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour {
     float _speed;
     float _remainingLight;
     bool _running;
-
+    CircleCollider2D collider;
 
     //Variable internal
     internal float _speedRatio = 1;
@@ -36,6 +36,7 @@ public class PlayerScript : MonoBehaviour {
         _rb = GetComponent<Rigidbody2D>();
         _cam = GetComponentInChildren<Camera>();
         _light = GetComponentInChildren<Light2D>();
+        collider = _light.GetComponent<CircleCollider2D>();
         _anim = GetComponentInChildren<Animator>();
         _remainingLight = _maxLight;
         animState = animationState.Idle;
@@ -75,6 +76,7 @@ public class PlayerScript : MonoBehaviour {
         }
 
         _light.range = _remainingLight;
+        collider.radius = _remainingLight;
     }
 
     void CameraManagement() {

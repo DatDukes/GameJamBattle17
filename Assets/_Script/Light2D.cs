@@ -20,7 +20,6 @@ public class Light2D : MonoBehaviour
     private Mesh mesh;
     private Material material;
     private MeshFilter meshFilter;
-    private MeshRenderer meshRenderer;
 
     private Vector3[] vertexs;
     private int[] triangles;
@@ -30,7 +29,6 @@ public class Light2D : MonoBehaviour
         mask = 0 | cullingMask;
 
         meshFilter = GetComponent<MeshFilter>();
-        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     private void Update()
