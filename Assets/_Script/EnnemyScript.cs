@@ -19,6 +19,9 @@ public class EnnemyScript : MonoBehaviour {
     RaycastHit2D _chaseHit;
     public LayerMask LightMask;
     public LayerMask OtherMask;
+	public SpriteRenderer sprRenderer;
+	public Sprite Up,Down,Left,Right;
+
 
     Vector3 lightTarget;
     Vector3 playerTarget;
@@ -32,6 +35,7 @@ public class EnnemyScript : MonoBehaviour {
         Player = GameObject.FindGameObjectWithTag("Player");
         _rb = GetComponent<Rigidbody2D>();
         state = BehaviorState.Idle;
+
     }
 	
 	void Update () {
@@ -49,9 +53,25 @@ public class EnnemyScript : MonoBehaviour {
 
                 break;
         }
+		aniamtionManager ();
     }
 
     void aniamtionManager() {
+		Vector3 myVelocity = _rb.velocity;
+		if (Mathf.Abs (myVelocity.x) >= Mathf.Abs (myVelocity.y)) {
+			if (myVelocity.x >= 0) {
+				sprRenderer.sprite = Right;
+			} else {
+				sprRenderer.sprite = Left;
+			}
+		} else {
+			if (myVelocity.y >= 0) {
+				sprRenderer.sprite = Up;
+			} else {
+				sprRenderer.sprite = Down;
+			}
+		}
+
     }
 
     void Search(){
