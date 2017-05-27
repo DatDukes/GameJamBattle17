@@ -122,6 +122,5 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void Die(){
-        print("Dead");
     }
 }

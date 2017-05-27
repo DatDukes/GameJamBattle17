@@ -22,6 +22,7 @@ public class EnnemyScript : MonoBehaviour {
 
     Vector3 lightTarget;
     Vector3 playerTarget;
+    Vector3 SearchPos;
     Rigidbody2D _rb;
     float timer;
     float angle;
@@ -45,11 +46,16 @@ public class EnnemyScript : MonoBehaviour {
                 break;
 
             case (BehaviorState.Search):
+
                 break;
         }
     }
 
     void aniamtionManager() {
+    }
+
+    void Search(){
+        
     }
 
     void Idle(){
@@ -61,7 +67,6 @@ public class EnnemyScript : MonoBehaviour {
             if ((int)animState >= 4) {
                 animState = GuardAnimState.Right;
             }
-            print(animState);
             timer = 0;
         }
     }
@@ -72,26 +77,48 @@ public class EnnemyScript : MonoBehaviour {
         _chaseHit = (RaycastHit2D)Physics2D.Raycast(transform.position, dir, 100f, OtherMask);
         if (_chaseHit.transform != null){
             _rb.AddForce(dir * speed, ForceMode2D.Impulse);
+            raycastOrigin.transform.rotation = setRotation(dir);
         }
         else {
             dir = lightTarget - transform.position;
             _rb.AddForce(dir.normalized * speed, ForceMode2D.Impulse);
+            raycastOrigin.transform.rotation = setRotation(dir);
+        }
+    }
+
+    Quaternion setRotation(Vector3 direction) {
+        if (direction.y >= 0)
+        {
+            return Quaternion.Euler(new Vector3(0, 0, Mathf.Acos(direction.x / direction.magnitude) * Mathf.Rad2Deg));
+        }
+        else if (direction.y < 0 && direction.x < 0)
+        {
+            return Quaternion.Euler(new Vector3(0, 0, Mathf.Asin(direction.x / direction.magnitude) * Mathf.Rad2Deg - 90));
+        }
+        else
+        {
+            return Quaternion.Euler(new Vector3(0, 0, Mathf.Asin(direction.y / direction.magnitude) * Mathf.Rad2Deg));
         }
     }
 
     void Detect() {
         _ligthHit = (RaycastHit2D)Physics2D.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.right, ViewDistance, LightMask);
-        if (_ligthHit.transform != null && _ligthHit.collider.tag == "Light"){
+        if (_ligthHit.transform != null && _ligthHit.collider.tag == "Light")
+        {
             Vector2 dir = (Vector2)Player.transform.position - _ligthHit.point;
             _otherHit = (RaycastHit2D)Physics2D.Raycast(_ligthHit.point, dir.normalized, 100f, OtherMask);
             lightTarget = _ligthHit.point;
-            if (_otherHit.transform != null){
-                if (_otherHit.transform.tag == "Player"){
-                    print("Spoted");
+            if (_otherHit.transform != null)
+            {
+                if (_otherHit.transform.tag == "Player")
+                {
                     state = BehaviorState.Chase;
                     playerTarget = _otherHit.point;
                 }
             }
+        }
+        else {
+            state = BehaviorState.Search;
         }
 
         _ligthHit = new RaycastHit2D();
