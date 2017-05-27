@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1127287186306304}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.19, y: 10.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4790996309055036}
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reverseDiretion: 0
   angle: 360
-  range: 4
+  range: 2.5
   color: {r: 1, g: 0.76906693, b: 0.27205884, a: 0.534}
   cullingMask:
     serializedVersion: 2
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkspeed: 0.8
   _runSpeed: 1.5
-  _maxLight: 4
+  _maxLight: 2.5
   _lightDecreaseSpeed: 1
   _lightIncreaseSpeed: 1
   _cameraOffset: 4
