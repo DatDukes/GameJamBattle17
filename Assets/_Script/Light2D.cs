@@ -31,9 +31,9 @@ public class Light2D : MonoBehaviour
 
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
-        material = new Material(Shader.Find("Sprites/Default"));
-        material.SetColor("_Color", color);
-        meshRenderer.sharedMaterial = material;
+        //material = new Material(Shader.Find("Sprites/Default"));
+        //material.SetColor("_Color", color);
+        //meshRenderer.sharedMaterial = material;
 
     }
 
@@ -41,11 +41,11 @@ public class Light2D : MonoBehaviour
     {
         mask = 0 | cullingMask;
         range = Mathf.Clamp(range, 0, range);
-        material.SetColor("_Color", color);
+       // material.SetColor("_Color", color);
 
         segments = Mathf.RoundToInt(angle * 10);
         vertexs = new Vector3[segments + 1];
-        vertexs[0] = transform.InverseTransformPoint(transform.localPosition);
+        vertexs[0] = transform.InverseTransformPoint(transform.position);
 
         int count = 1;
         for (float i = -transform.localEulerAngles.z; i <= -transform.localEulerAngles.z + angle; i ++)
@@ -54,10 +54,10 @@ public class Light2D : MonoBehaviour
                 new Vector2(Mathf.Cos(Mathf.Deg2Rad * i), Mathf.Sin(Mathf.Deg2Rad * i))
               : new Vector2(Mathf.Sin(Mathf.Deg2Rad * i), Mathf.Cos(Mathf.Deg2Rad * i));
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.localPosition, direction, range, mask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, range, mask);
 
             distance = hit.collider == null ? range : hit.distance;
-            Vector2 endPoint = new Vector2(transform.localPosition.x + distance * direction.x / direction.magnitude, transform.localPosition.y + distance * direction.y / direction.magnitude);
+            Vector2 endPoint = new Vector2(transform.position.x + distance * direction.x / direction.magnitude, transform.position.y + distance * direction.y / direction.magnitude);
             endPoint = transform.InverseTransformPoint(endPoint);
 
             if (count <= segments)
