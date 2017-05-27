@@ -308,11 +308,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b77029f11510d42b5a99fbaf81b57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkspeed: 1
-  _runSpeed: 2
+  _walkspeed: 0.8
+  _runSpeed: 1.5
   _maxLight: 4
   _lightDecreaseSpeed: 1
   _lightIncreaseSpeed: 1
+  _cameraOffset: 2
 --- !u!124 &124858296482603528
 Behaviour:
   m_ObjectHideFlags: 1
