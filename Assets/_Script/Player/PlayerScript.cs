@@ -9,10 +9,14 @@ public class PlayerScript : MonoBehaviour {
     Animator _anim;
     Light2D _light;
     animationState animState;
+    Camera _cam;
+    MeshCollider _col;
     float _speed;
     float _remainingLight;
-    bool _running; 
+    bool _running;
 
+
+    //Variable internal
     internal float _speedRatio = 1;
 
     //Variable visible dans l'inspector
@@ -26,10 +30,14 @@ public class PlayerScript : MonoBehaviour {
     private float _lightDecreaseSpeed;
     [SerializeField]
     private float _lightIncreaseSpeed;
+    [SerializeField]
+    private float _cameraOffset;
 
     void Start () {
         _rb = GetComponent<Rigidbody2D>();
+        _cam = GetComponentInChildren<Camera>();
         _light = GetComponentInChildren<Light2D>();
+        _col = _light.GetComponent<MeshCollider>();
         _anim = GetComponentInChildren<Animator>();
         _remainingLight = _maxLight;
         animState = animationState.Idle;
@@ -39,6 +47,8 @@ public class PlayerScript : MonoBehaviour {
         MovementUpdate();
         LightUpdate();
         AnimationManager();
+        CameraManagement();
+        _col.sharedMesh = _col.GetComponent<MeshFilter>().mesh;
     }
 
     void MovementUpdate() {
@@ -70,28 +80,33 @@ public class PlayerScript : MonoBehaviour {
         _light.range = _remainingLight;
     }
 
+    void CameraManagement() {
+        Vector3 pos = new Vector3(Input.GetAxis("CamX"), Input.GetAxis("CamY"),0);
+        _cam.transform.localPosition = Vector3.Lerp(_cam.transform.localPosition, pos * _cameraOffset + Vector3.back * 10, Time.deltaTime * 5);
+    }
+
     void AnimationManager() {
-        if (Input.GetAxis("Horizontal") > 0.1f){
+        if (Input.GetAxis("Horizontal") > 0.3f){
             if (animState != animationState.Right) {
                 _anim.SetTrigger("Right");
                 animState = animationState.Right;
             }
         }
-        else if (Input.GetAxis("Horizontal") < -0.1f){
+        else if (Input.GetAxis("Horizontal") < -0.3f){
             if (animState != animationState.Left)
             {
                 _anim.SetTrigger("Left");
                 animState = animationState.Left;
             }
         }
-        else if (Input.GetAxis("Vertical") > 0.1f){
+        else if (Input.GetAxis("Vertical") > 0.3f){
             if (animState != animationState.Up)
             {
                 _anim.SetTrigger("Up");
                 animState = animationState.Up;
             }
         }
-        else if (Input.GetAxis("Vertical") < -0.1f){
+        else if (Input.GetAxis("Vertical") < -0.3f){
             if (animState != animationState.Down)
             {
                 _anim.SetTrigger("Down");
