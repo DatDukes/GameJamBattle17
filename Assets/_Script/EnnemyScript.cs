@@ -115,7 +115,7 @@ public class EnnemyScript : MonoBehaviour {
             {
                 raycastOrigin.transform.rotation = setRotation(agent.velocity.normalized);
             }
-            if (Vector3.Distance(transform.position, BasePosition) < 0.05f)
+            if (Vector3.Distance(transform.position, BasePosition) < 0.5f)
             {
                 state = BehaviorState.Idle;
                 timerSearch = 0;
