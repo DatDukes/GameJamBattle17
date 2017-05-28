@@ -60,10 +60,12 @@ public class PlayerScript : MonoBehaviour {
 
     void MovementUpdate() {
         if (Input.GetButton("Run")){
+            _anim.speed = 1.5f;
             _speed = _runSpeed * _speedRatio;
             _running = true;
         }
         else {
+            _anim.speed = 1;
             _speed = _walkspeed * _speedRatio;
             _running = false;
         }
