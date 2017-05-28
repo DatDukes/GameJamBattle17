@@ -340,7 +340,7 @@ MonoBehaviour:
   Left: {fileID: 21300000, guid: 6391146d4a02a294fb340b01f002d3f5, type: 3}
   Right: {fileID: 21300004, guid: 6391146d4a02a294fb340b01f002d3f5, type: 3}
   m_audioSource: {fileID: 82947153086575148}
-  m_sfxPlayerDetected: {fileID: 8300000, guid: d4f915c9985d113438c86d253567ad2e, type: 3}
+  m_sfxPlayerDetected: {fileID: 8300000, guid: a1143636bfeb2d541815a0afbe6c0852, type: 3}
   m_sfxPlayerDetectedVolume: 0.25
 --- !u!114 &114475665096437916
 MonoBehaviour:
