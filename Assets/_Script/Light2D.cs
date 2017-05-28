@@ -83,7 +83,7 @@ public class Light2D : MonoBehaviour
 
     private void OnDisable()
     {
-        meshFilter.sharedMesh = null;
+       // meshFilter.sharedMesh = null;
     }
 
 }

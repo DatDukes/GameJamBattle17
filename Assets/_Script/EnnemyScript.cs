@@ -44,10 +44,10 @@ public class EnnemyScript : MonoBehaviour {
 
 
     void Start () {
-        raycastOrigin = transform.FindChild("RaycastOrigin").gameObject;
+        raycastOrigin = transform.Find("RaycastOrigin").gameObject;
         agent = GetComponent<NavMeshAgent>();
         _light = GetComponentInChildren<Light2D>();
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = GameObject.Find("PlayerOne");
         _playerScript = Player.GetComponent<PlayerScript>();
         state = BehaviorState.Idle;
         _light.range = ViewDistance;
@@ -180,12 +180,18 @@ public class EnnemyScript : MonoBehaviour {
         _chaseHit = (RaycastHit2D)Physics2D.Raycast(transform.position, dir, 100f, OtherMask);
         if (_chaseHit.transform != null){
             agent.SetDestination(playerTarget);
-            raycastOrigin.transform.rotation = setRotation(dir);
+            if (dir.magnitude > 0.05f)
+            {
+                raycastOrigin.transform.rotation = setRotation(dir);
+            }
         }
         else {
             dir = lightTarget - transform.position;
             agent.SetDestination(lightTarget);
-            raycastOrigin.transform.rotation = setRotation(dir);
+            if (dir.magnitude > 0.05f)
+            {
+                raycastOrigin.transform.rotation = setRotation(dir);
+            }
         }
     }
 
@@ -219,7 +225,7 @@ public class EnnemyScript : MonoBehaviour {
             _ligthHit = (RaycastHit2D)Physics2D.Raycast(raycastOrigin.transform.position, v, ViewDistance, LightMask);
             if (_ligthHit.transform != null && _ligthHit.collider.tag == "Light")
             {
-                Vector2 dir = (Vector2)Player.transform.position - _ligthHit.point;
+                Vector2 dir = (Vector2)_ligthHit.transform.position - _ligthHit.point;
                 _otherHit = (RaycastHit2D)Physics2D.Raycast(_ligthHit.point, dir.normalized, 100f, OtherMask);
                 lightTarget = _ligthHit.point;
                 if (_otherHit.transform != null)

@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevel: _Menu
+  switchs: []
 --- !u!212 &212348127981274940
 SpriteRenderer:
   m_ObjectHideFlags: 1
