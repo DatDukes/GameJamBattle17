@@ -44,7 +44,7 @@ public class EnnemyScript : MonoBehaviour {
 
 
     void Start () {
-        raycastOrigin = transform.FindChild("RaycastOrigin").gameObject;
+        raycastOrigin = transform.Find("RaycastOrigin").gameObject;
         agent = GetComponent<NavMeshAgent>();
         _light = GetComponentInChildren<Light2D>();
         Player = GameObject.Find("PlayerOne");

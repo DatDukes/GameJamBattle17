@@ -44,7 +44,7 @@ public class PlayerScript : MonoBehaviour {
         _light = GetComponentInChildren<Light2D>();
         collider = _light.GetComponent<CircleCollider2D>();
         _anim = GetComponentInChildren<Animator>();
-        sp = transform.FindChild("Sprite").GetComponent<SpriteRenderer>();
+        sp = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         _remainingLight = _maxLight;
         animState = animationState.Idle;
     }
