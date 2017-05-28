@@ -27,7 +27,7 @@ public class Light2D : MonoBehaviour
     private void Start()
     {
         mask = 0 | cullingMask;
-
+        
         meshFilter = GetComponent<MeshFilter>();
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum animationState {Idle, Left, Right, Up, Down};
 
@@ -13,6 +14,7 @@ public class PlayerScript : MonoBehaviour {
     float _speed;
     float _remainingLight;
     bool _running;
+    internal bool freeze;
     CircleCollider2D collider;
 
     //Variable internal
@@ -43,10 +45,12 @@ public class PlayerScript : MonoBehaviour {
     }
 	
 	void Update () {
-        MovementUpdate();
-        LightUpdate();
-        AnimationManager();
-        CameraManagement();
+        if (!freeze){
+            MovementUpdate();
+            LightUpdate();
+            AnimationManager();
+            CameraManagement();
+        }
     }
 
     void MovementUpdate() {
@@ -122,5 +126,12 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void Die(){
+        freeze = true;
+        StartCoroutine(Reset());
+    }
+
+    IEnumerator Reset() {
+        yield return new WaitForSeconds (2f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

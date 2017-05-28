@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 83f9cfbd595a30b458d967f21e04f627
+timeCreated: 1495926907
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Keycard
+  fontNames:
+  - Keycard
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
