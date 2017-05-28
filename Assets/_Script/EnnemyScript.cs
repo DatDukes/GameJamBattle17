@@ -12,7 +12,7 @@ public class EnnemyScript : MonoBehaviour {
     public float speed;
 
     public Transform[] wayPoint;
-    int ActualWP = 1;
+    int ActualWP = 0;
 
     BehaviorState state;
     GuardAnimState animState;
@@ -51,23 +51,27 @@ public class EnnemyScript : MonoBehaviour {
         _playerScript = Player.GetComponent<PlayerScript>();
         state = BehaviorState.Idle;
         _light.range = ViewDistance;
-        BasePosition = transform.position;  
+        BasePosition = transform.position;
+        agent.speed = speed;
     }
 	
 	void Update () {
         Detect();
         switch (state) {
             case (BehaviorState.Idle):
+                agent.speed = speed;
                 Idle();
                 break;
 
             case (BehaviorState.Chase):
+                agent.speed = speed * 2;
                 Chase();
                 DealDomage();
                 aniamtionManager();
                 break;
 
             case (BehaviorState.Search):
+                agent.speed = speed * 2;
                 Search();
                 break;
         }
