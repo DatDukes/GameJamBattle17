@@ -41,6 +41,10 @@ public class EnnemyScript : MonoBehaviour {
     float angle;
     Light2D _light;
 
+    // Audio
+    public AudioSource m_audioSource;
+    public AudioClip m_sfxPlayerDetected;
+    public float m_sfxPlayerDetectedVolume = 0.25f;
 
 
     void Start () {
@@ -250,6 +254,8 @@ public class EnnemyScript : MonoBehaviour {
         if (hit)
         {
             state = BehaviorState.Chase;
+
+            m_audioSource.PlayOneShot(m_sfxPlayerDetected, m_sfxPlayerDetectedVolume);
         }
         else if(state == BehaviorState.Chase)
         {

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114118016258200204}
   - component: {fileID: 58089036688129682}
   - component: {fileID: 195624995244643666}
+  - component: {fileID: 82947153086575148}
   m_Layer: 8
   m_Name: Ennemy
   m_TagString: Ennemy
@@ -233,6 +234,86 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!82 &82947153086575148
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1059211143069802}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114118016258200204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,6 +345,9 @@ MonoBehaviour:
   Down: {fileID: 21300002, guid: 6391146d4a02a294fb340b01f002d3f5, type: 3}
   Left: {fileID: 21300000, guid: 6391146d4a02a294fb340b01f002d3f5, type: 3}
   Right: {fileID: 21300004, guid: 6391146d4a02a294fb340b01f002d3f5, type: 3}
+  m_audioSource: {fileID: 82947153086575148}
+  m_sfxPlayerDetected: {fileID: 8300000, guid: d4f915c9985d113438c86d253567ad2e, type: 3}
+  m_sfxPlayerDetectedVolume: 0.25
 --- !u!114 &114475665096437916
 MonoBehaviour:
   m_ObjectHideFlags: 1
