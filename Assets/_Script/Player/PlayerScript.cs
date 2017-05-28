@@ -60,10 +60,12 @@ public class PlayerScript : MonoBehaviour {
 
     void MovementUpdate() {
         if (Input.GetButton("Run")){
+            _anim.speed = 1.5f;
             _speed = _runSpeed * _speedRatio;
             _running = true;
         }
         else {
+            _anim.speed = 1;
             _speed = _walkspeed * _speedRatio;
             _running = false;
         }
@@ -96,6 +98,9 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void AnimationManager() {
+		
+		transform.localScale = Vector3.one;
+
         if (Input.GetAxis("Horizontal") > 0.3f){
             if (animState != animationState.Right) {
                 _anim.SetTrigger("Right");
@@ -106,6 +111,7 @@ public class PlayerScript : MonoBehaviour {
             if (animState != animationState.Left)
             {
                 _anim.SetTrigger("Left");
+				transform.localScale = new Vector3 (-1f, 1f, 1f);
                 animState = animationState.Left;
             }
         }
