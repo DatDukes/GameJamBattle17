@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour {
     Light2D _light;
     animationState animState;
     Camera _cam;
+    SpriteRenderer sp;
     float _speed;
     float _remainingLight;
     bool _running;
@@ -34,12 +35,16 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField]
     private float _cameraOffset;
 
+    //feedback var
+    bool dmgPlaying;
+
     void Start () {
         _rb = GetComponent<Rigidbody2D>();
         _cam = GetComponentInChildren<Camera>();
         _light = GetComponentInChildren<Light2D>();
         collider = _light.GetComponent<CircleCollider2D>();
         _anim = GetComponentInChildren<Animator>();
+        sp = transform.FindChild("Sprite").GetComponent<SpriteRenderer>();
         _remainingLight = _maxLight;
         animState = animationState.Idle;
     }
@@ -71,12 +76,14 @@ public class PlayerScript : MonoBehaviour {
     void LightUpdate() {
         if (_running && _rb.velocity.magnitude > 1) {
             _remainingLight -= Time.deltaTime * _lightDecreaseSpeed;
-            if (_remainingLight <= 0) {
-                Die();
-            }
         }
         else if (_remainingLight < _maxLight) {
             _remainingLight += Time.deltaTime * _lightIncreaseSpeed;
+        }
+
+        if (_remainingLight <= 0)
+        {
+            Die();
         }
 
         _light.range = _remainingLight;
@@ -123,6 +130,27 @@ public class PlayerScript : MonoBehaviour {
                 animState = animationState.Idle;
             }
         }
+    }
+
+    public void loseLife() {
+        _remainingLight -= Time.deltaTime * _lightDecreaseSpeed * 2;
+        domageFeedback();
+    }
+
+    void domageFeedback() {
+        if (!dmgPlaying) {
+            StartCoroutine(LoseLifeFeedback());
+        }
+    }
+
+    IEnumerator LoseLifeFeedback()
+    {
+        dmgPlaying = true;
+        sp.color = Color.red;
+        yield return new WaitForSeconds(0.05f);
+        sp.color = Color.white;
+        yield return new WaitForSeconds(0.05f);
+        dmgPlaying = false;
     }
 
     void Die(){

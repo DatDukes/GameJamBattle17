@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum BehaviorState { Idle, Chase, Search};
 public enum GuardAnimState { Right, Up, Left, Down };
@@ -9,11 +10,17 @@ public enum GuardAnimState { Right, Up, Left, Down };
 public class EnnemyScript : MonoBehaviour {
     public float ViewDistance;
     public float speed;
+
+    public Transform[] wayPoint;
+    int ActualWP = 1;
+
     BehaviorState state;
     GuardAnimState animState;
+    NavMeshAgent agent;
 
     GameObject raycastOrigin;
     GameObject Player;
+    PlayerScript _playerScript;
     RaycastHit2D _ligthHit;
     RaycastHit2D _otherHit;
     RaycastHit2D _chaseHit;
@@ -26,18 +33,23 @@ public class EnnemyScript : MonoBehaviour {
     Vector3 lightTarget;
     Vector3 playerTarget;
     Vector3 SearchPos;
-    Rigidbody2D _rb;
+    Vector3 TargetRotation;
+    Vector3 BasePosition;
+    Vector3 random;
     float timer;
+    float timerSearch;
     float angle;
     Light2D _light;
 
     void Start () {
         raycastOrigin = transform.FindChild("RaycastOrigin").gameObject;
+        agent = GetComponent<NavMeshAgent>();
         _light = GetComponentInChildren<Light2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
-        _rb = GetComponent<Rigidbody2D>();
+        _playerScript = Player.GetComponent<PlayerScript>();
         state = BehaviorState.Idle;
         _light.range = ViewDistance;
+        BasePosition = transform.position;  
     }
 	
 	void Update () {
@@ -49,17 +61,24 @@ public class EnnemyScript : MonoBehaviour {
 
             case (BehaviorState.Chase):
                 Chase();
+                aniamtionManager();
                 break;
 
             case (BehaviorState.Search):
-
+                Search();
                 break;
         }
-		aniamtionManager ();
+        DealDomage();
+    }
+
+    void DealDomage() {
+        if (Vector3.Distance(transform.position, Player.transform.position) < 2f) {
+            _playerScript.loseLife();
+        }
     }
 
     void aniamtionManager() {
-		Vector3 myVelocity = _rb.velocity;
+		Vector3 myVelocity = agent.velocity;
 		if (Mathf.Abs (myVelocity.x) >= Mathf.Abs (myVelocity.y)) {
 			if (myVelocity.x >= 0) {
 				sprRenderer.sprite = Right;
@@ -77,20 +96,80 @@ public class EnnemyScript : MonoBehaviour {
     }
 
     void Search(){
-        
+        timerSearch += Time.deltaTime;
+        if (timerSearch > 3f)
+        {
+            agent.SetDestination(BasePosition);
+            aniamtionManager();
+            if (agent.velocity.normalized.magnitude > 0.05f)
+            {
+                raycastOrigin.transform.rotation = setRotation(agent.velocity.normalized);
+            }
+            if (Vector3.Distance(transform.position, BasePosition) < 0.05f)
+            {
+                state = BehaviorState.Idle;
+                timerSearch = 0;
+            }
+        }
     }
 
     void Idle(){
-        timer += Time.deltaTime;
-        if (timer > 2f) {
-            angle += 90;
-            raycastOrigin.transform.rotation = Quaternion.Euler(0, 0, angle);
-            animState++;
-            if ((int)animState >= 4) {
-                animState = GuardAnimState.Right;
+        if (wayPoint.Length <= 1)
+        {
+            timer += Time.deltaTime;
+            if (timer > 2f)
+            {
+                angle += 90;
+                if (angle > 360)
+                {
+                    raycastOrigin.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                }
+                angle = angle % 361;
+                TargetRotation = new Vector3(0, 0, angle);
+                animState++;
+                if ((int)animState >= 4)
+                {
+                    animState = GuardAnimState.Right;
+                }
+                switch (animState)
+                {
+                    case(GuardAnimState.Right):
+                        sprRenderer.sprite = Right;
+                        break;
+
+                    case (GuardAnimState.Left):
+                        sprRenderer.sprite = Left;
+                        break;
+
+                    case (GuardAnimState.Up):
+                        sprRenderer.sprite = Up;
+                        break;
+
+                    case (GuardAnimState.Down):
+                        sprRenderer.sprite = Down;
+                        break;
+                }
+
+                timer = 0;
             }
-            timer = 0;
+            updateRotation();
         }
+        else {
+            agent.SetDestination(wayPoint[ActualWP].position);
+            if (agent.velocity.normalized.magnitude > 0.05f)
+            {
+                raycastOrigin.transform.rotation = setRotation(agent.velocity.normalized);
+            }
+
+            if (Vector3.Distance(wayPoint[ActualWP].position, transform.position) < 0.5f) {
+                ActualWP = (ActualWP + 1) % wayPoint.Length;
+            }
+            aniamtionManager();
+        } 
+    }
+
+    void updateRotation() {
+        raycastOrigin.transform.rotation = Quaternion.Euler(Vector3.Lerp(raycastOrigin.transform.eulerAngles, TargetRotation, Time.deltaTime * 3));
     }
 
     void Chase() {
@@ -98,12 +177,12 @@ public class EnnemyScript : MonoBehaviour {
         dir.Normalize();
         _chaseHit = (RaycastHit2D)Physics2D.Raycast(transform.position, dir, 100f, OtherMask);
         if (_chaseHit.transform != null){
-            _rb.AddForce(dir * speed, ForceMode2D.Impulse);
+            agent.SetDestination(playerTarget);
             raycastOrigin.transform.rotation = setRotation(dir);
         }
         else {
             dir = lightTarget - transform.position;
-            _rb.AddForce(dir.normalized * speed, ForceMode2D.Impulse);
+            agent.SetDestination(lightTarget);
             raycastOrigin.transform.rotation = setRotation(dir);
         }
     }
@@ -156,9 +235,9 @@ public class EnnemyScript : MonoBehaviour {
         {
             state = BehaviorState.Chase;
         }
-        else
+        else if(state == BehaviorState.Chase)
         {
-            state = BehaviorState.Idle;
+            state = BehaviorState.Search;
         }
     }
 }
