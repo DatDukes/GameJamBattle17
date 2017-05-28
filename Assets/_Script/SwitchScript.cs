@@ -8,6 +8,8 @@ public class SwitchScript : MonoBehaviour {
     bool _active;
     SpriteRenderer renderer;
 
+	public UIController objectifs;
+
     [SerializeField]
     private float _timer;
     [SerializeField]
@@ -29,6 +31,7 @@ public class SwitchScript : MonoBehaviour {
                     renderer.color = Color.Lerp(_activeColor, _unactiveColor, _timer / _maxTimer);
                     if (_timer <= 0) {
                         _active = true;
+						objectifs.coloration ();
                     }
                 }
                 else {

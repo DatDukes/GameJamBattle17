@@ -41,6 +41,8 @@ public class EnnemyScript : MonoBehaviour {
     float angle;
     Light2D _light;
 
+
+
     void Start () {
         raycastOrigin = transform.FindChild("RaycastOrigin").gameObject;
         agent = GetComponent<NavMeshAgent>();

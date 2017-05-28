@@ -148,7 +148,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.5147059, g: 0.5147059, b: 0.5147059, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -324,8 +324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b77029f11510d42b5a99fbaf81b57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkspeed: 0.8
-  _runSpeed: 1.5
+  _walkspeed: 0.5
+  _runSpeed: 1.3
   _maxLight: 2.5
   _lightDecreaseSpeed: 1
   _lightIncreaseSpeed: 1
