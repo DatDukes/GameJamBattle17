@@ -63,14 +63,15 @@ public class EnnemyScript : MonoBehaviour {
 
             case (BehaviorState.Chase):
                 Chase();
+                DealDomage();
                 aniamtionManager();
                 break;
 
             case (BehaviorState.Search):
                 Search();
+                DealDomage();
                 break;
         }
-        DealDomage();
     }
 
     void DealDomage() {

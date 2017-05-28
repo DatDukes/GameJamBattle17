@@ -11,10 +11,14 @@ public class Leurre : MonoBehaviour {
 
     internal bool active;
 
+    internal GameObject hint;
+
 	void Start () {
         _light = GetComponentInChildren<Light2D>();
         _col = _light.GetComponent<CircleCollider2D>();
         _light.gameObject.SetActive(false);
+        hint = transform.Find("Help").gameObject;
+        hint.SetActive(false);
     }
 
     public void Activation(){
@@ -32,19 +36,19 @@ public class Leurre : MonoBehaviour {
             _col.radius += Time.deltaTime * 5;
             yield return 0;
         }
-        StartCoroutine(ShutDown());
     }
 
-    IEnumerator ShutDown()
+    public void ShutDown()
     {
-        while (_light.range > 0)
+        if(_light.range > 0)
         {
-            _light.range -= Time.deltaTime / timeToRecall;
-            _col.radius -= Time.deltaTime / timeToRecall;
-            yield return 0;
+            _light.range -= (Time.fixedDeltaTime * Radius) / timeToRecall;
+            _col.radius -= (Time.fixedDeltaTime * Radius) / timeToRecall;
         }
-
-        active = false;
-        _light.gameObject.SetActive(false);
+        else
+        {
+            active = false;
+            _light.gameObject.SetActive(false);
+        }
     }
 }
