@@ -123,7 +123,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1564215588677188}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.038448, y: -11.943779, z: 3.3203125}
+  m_LocalPosition: {x: 21.09, y: -3.1428986, z: 4.515625}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4256964661732680}
@@ -238,6 +238,8 @@ MonoBehaviour:
   _timer: 2
   _activeColor: {r: 0.075020075, g: 0.49264705, b: 0.0036224083, a: 1}
   _unactiveColor: {r: 1, g: 0, b: 0, a: 1}
+  maListeDeLumieres: []
+  newColor: {fileID: 2100000, guid: 55a2d77253780ed4c974b0a7de18f469, type: 2}
 --- !u!212 &212423685567091972
 SpriteRenderer:
   m_ObjectHideFlags: 1
