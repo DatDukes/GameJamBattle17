@@ -37,7 +37,11 @@ public class EnnemyScript : MonoBehaviour {
         Player = GameObject.FindGameObjectWithTag("Player");
         _rb = GetComponent<Rigidbody2D>();
         state = BehaviorState.Idle;
+<<<<<<< HEAD
         _light.range = ViewDistance;
+=======
+
+>>>>>>> c4379457416818ce75716068b6d5853ba391799c
     }
 	
 	void Update () {
@@ -158,7 +162,7 @@ public class EnnemyScript : MonoBehaviour {
         }
         else
         {
-            state = BehaviorState.Idle;
+            state = BehaviorState.Search;
         }
     }
 }
