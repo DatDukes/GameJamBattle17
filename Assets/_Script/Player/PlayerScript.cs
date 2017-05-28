@@ -98,6 +98,9 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void AnimationManager() {
+		
+		transform.localScale = Vector3.one;
+
         if (Input.GetAxis("Horizontal") > 0.3f){
             if (animState != animationState.Right) {
                 _anim.SetTrigger("Right");
@@ -108,6 +111,7 @@ public class PlayerScript : MonoBehaviour {
             if (animState != animationState.Left)
             {
                 _anim.SetTrigger("Left");
+				transform.localScale = new Vector3 (-1f, 1f, 1f);
                 animState = animationState.Left;
             }
         }
