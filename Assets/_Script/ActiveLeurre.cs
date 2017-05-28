@@ -16,6 +16,15 @@ public class ActiveLeurre : MonoBehaviour {
         if (!ls.active && Input.GetButtonDown("Action") && _colliding) {
             ls.Activation();
         }
+
+        if (_colliding && !ls.hint.activeSelf)
+        {
+            ls.hint.SetActive(true);
+        }
+        else if (!_colliding && ls.hint.activeSelf) {
+            ls.hint.SetActive(false);
+        }
+
         _colliding = false;
     }
 
@@ -24,6 +33,10 @@ public class ActiveLeurre : MonoBehaviour {
         if (col.tag == "Player")
         {
             _colliding = true;
+        }
+        if (col.tag == "Ennemy" && ls.active)
+        {
+            ls.ShutDown();
         }
     }
 }
