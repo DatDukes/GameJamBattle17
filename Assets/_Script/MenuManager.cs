@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour {
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        Cursor.visible =false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Play(string s)

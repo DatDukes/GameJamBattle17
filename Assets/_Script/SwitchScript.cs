@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwitchScript : MonoBehaviour {
     float _maxTimer;
@@ -9,6 +10,8 @@ public class SwitchScript : MonoBehaviour {
     SpriteRenderer renderer;
 
 	public UIController objectifs;
+
+    Slider slide;
 
     [SerializeField]
     private float _timer;
@@ -25,6 +28,7 @@ public class SwitchScript : MonoBehaviour {
         _maxTimer = _timer;
         renderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
         renderer.color = _unactiveColor;
+        slide = transform.parent.GetComponentInChildren<Slider>();
     }
 
     void FixedUpdate() {
@@ -32,8 +36,8 @@ public class SwitchScript : MonoBehaviour {
             if (_colliding) {
                 if (Input.GetButton("Action")) {
                     _timer -= Time.fixedDeltaTime;
-                    renderer.color = Color.Lerp(_activeColor, _unactiveColor, _timer / _maxTimer);
-					if (_timer <= 0) {
+                    slide.value = (_maxTimer - _timer) / _maxTimer;
+                    if (_timer <= 0) {
 						_active = true;
 						objectifs.coloration ();
 						foreach (Renderer myRenderer in maListeDeLumieres) {
@@ -48,7 +52,7 @@ public class SwitchScript : MonoBehaviour {
             }
             else if (_timer == _maxTimer) {
                 _timer = _maxTimer;
-                renderer.color = _unactiveColor;
+                slide.value = 0;
             }
             _colliding = false;
         } 
