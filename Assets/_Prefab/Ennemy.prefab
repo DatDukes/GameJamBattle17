@@ -326,14 +326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ViewDistance: 3
-  speed: 0.8
-  wayPoint:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  speed: 1.5
+  wayPoint: []
   LightMask:
     serializedVersion: 2
     m_Bits: 513
