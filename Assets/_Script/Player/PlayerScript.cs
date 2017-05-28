@@ -133,7 +133,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     public void loseLife() {
-        _remainingLight -= Time.deltaTime * _lightDecreaseSpeed * 2;
+        _remainingLight -= Time.deltaTime * _lightDecreaseSpeed * 3;
         domageFeedback();
     }
 

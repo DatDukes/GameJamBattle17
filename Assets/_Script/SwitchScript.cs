@@ -5,7 +5,7 @@ using UnityEngine;
 public class SwitchScript : MonoBehaviour {
     float _maxTimer;
     bool _colliding;
-    bool _active;
+    internal bool _active;
     SpriteRenderer renderer;
 
 	public UIController objectifs;
