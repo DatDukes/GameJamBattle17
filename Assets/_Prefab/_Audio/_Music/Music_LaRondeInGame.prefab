@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4405396372825030}
   - component: {fileID: 82218329797127350}
   m_Layer: 0
-  m_Name: Music_LaRonde
+  m_Name: Music_LaRondeInGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -550,6 +550,11 @@ Prefab:
       propertyPath: m_Colors.m_ColorMultiplier
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114137883921664346, guid: 4639cf6423811784987f71a49f4c12b8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Scn_niveau_deux
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4639cf6423811784987f71a49f4c12b8, type: 2}
   m_IsPrefabParent: 0
