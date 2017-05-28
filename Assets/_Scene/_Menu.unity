@@ -1266,7 +1266,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 383}
-  m_SizeDelta: {x: 600, y: 200}
+  m_SizeDelta: {x: 1528.2, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2004809303
 MonoBehaviour:
@@ -1300,7 +1300,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Game name
+  m_Text: Magicka Maisoneuvus
 --- !u!222 &2004809304
 CanvasRenderer:
   m_ObjectHideFlags: 0
