@@ -63,6 +63,7 @@ public class EnnemyScript : MonoBehaviour {
 
             case (BehaviorState.Chase):
                 Chase();
+                DealDomage();
                 aniamtionManager();
                 break;
 
@@ -70,7 +71,6 @@ public class EnnemyScript : MonoBehaviour {
                 Search();
                 break;
         }
-        DealDomage();
     }
 
     void DealDomage() {
@@ -112,6 +112,10 @@ public class EnnemyScript : MonoBehaviour {
                 state = BehaviorState.Idle;
                 timerSearch = 0;
             }
+        }
+        else
+        {
+            DealDomage();
         }
     }
 

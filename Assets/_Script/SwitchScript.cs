@@ -17,6 +17,10 @@ public class SwitchScript : MonoBehaviour {
     [SerializeField]
     private Color _unactiveColor;
 
+	public Renderer[] maListeDeLumieres;
+	public Material newColor;
+
+
     void Start () {
         _maxTimer = _timer;
         renderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
@@ -29,11 +33,14 @@ public class SwitchScript : MonoBehaviour {
                 if (Input.GetButton("Action")) {
                     _timer -= Time.fixedDeltaTime;
                     renderer.color = Color.Lerp(_activeColor, _unactiveColor, _timer / _maxTimer);
-                    if (_timer <= 0) {
-                        _active = true;
+					if (_timer <= 0) {
+						_active = true;
 						objectifs.coloration ();
-                    }
-                }
+						foreach (Renderer myRenderer in maListeDeLumieres) {
+							myRenderer.material = newColor;
+						}
+					}
+                	}
                 else {
                     _timer = _maxTimer;
                     renderer.color = _unactiveColor;
@@ -45,7 +52,8 @@ public class SwitchScript : MonoBehaviour {
             }
             _colliding = false;
         } 
-    }
+    
+	}
 
     private void OnTriggerStay2D(Collider2D col)
     {
@@ -54,3 +62,4 @@ public class SwitchScript : MonoBehaviour {
         }
     }
 }
+
