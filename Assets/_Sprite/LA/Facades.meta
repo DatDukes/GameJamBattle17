@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+fileFormatVersion: 2
+guid: 5a58e62ddc9a16149a901f82645bbc97
+folderAsset: yes
+timeCreated: 1495984730
+licenseType: Free
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
 fileFormatVersion: 2
 guid: c9d0404ca7961ad44ad41a8d8fab73bb
 folderAsset: yes
@@ -7,3 +18,4 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+>>>>>>> master

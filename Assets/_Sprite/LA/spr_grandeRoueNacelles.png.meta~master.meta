@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+fileFormatVersion: 2
+guid: bc6909fa515441149b7782b5ff7075e6
+timeCreated: 1495984730
+licenseType: Free
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
 fileFormatVersion: 2
 guid: 7771ed6591626684fa0f989283c237fb
 timeCreated: 1495983870
@@ -6,3 +16,4 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+>>>>>>> master
