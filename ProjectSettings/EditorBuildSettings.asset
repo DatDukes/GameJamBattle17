@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/_Scene/_Menu.unity
     guid: 527519608c1c4b946a18d91f390d107f
   - enabled: 1
-    path: Assets/_Scene/Level 3.unity
+    path: Assets/_Scene/Level3.unity
     guid: 3fac6a27072fb6d4c94bfea6f81bc8f6
-  - enabled: 1
-    path: Assets/_Scene/Scn_niveau_deux.unity
-    guid: 3137c03be79d78244a36e7053de08be2
   - enabled: 1
     path: Assets/_Scene/LaRonde.unity
     guid: 9a03d26a42584fd4691400d43fbd9c87
+  - enabled: 1
+    path: Assets/_Scene/Scn_niveau_deuxbis.unity
+    guid: 51f8710d7fa0d6145bce4ab6ff56a317
