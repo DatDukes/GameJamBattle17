@@ -26,12 +26,15 @@ public class EnnemyScript : MonoBehaviour {
     Rigidbody2D _rb;
     float timer;
     float angle;
+    Light2D _light;
 
     void Start () {
         raycastOrigin = transform.FindChild("RaycastOrigin").gameObject;
+        _light = GetComponentInChildren<Light2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
         _rb = GetComponent<Rigidbody2D>();
         state = BehaviorState.Idle;
+        _light.range = ViewDistance;
     }
 	
 	void Update () {
@@ -102,26 +105,41 @@ public class EnnemyScript : MonoBehaviour {
     }
 
     void Detect() {
-        _ligthHit = (RaycastHit2D)Physics2D.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.right, ViewDistance, LightMask);
-        if (_ligthHit.transform != null && _ligthHit.collider.tag == "Light")
+        _ligthHit = new RaycastHit2D();
+        _otherHit = new RaycastHit2D();
+
+        bool hit = false;
+        Vector3[] rayTarget = new Vector3[3];
+        rayTarget[0] = (raycastOrigin.transform.right + raycastOrigin.transform.up * 0.415f);
+        rayTarget[1] = (raycastOrigin.transform.right + raycastOrigin.transform.up * -0.415f);
+        rayTarget[2] = raycastOrigin.transform.right ;
+
+        foreach(Vector3 v in rayTarget)
         {
-            Vector2 dir = (Vector2)Player.transform.position - _ligthHit.point;
-            _otherHit = (RaycastHit2D)Physics2D.Raycast(_ligthHit.point, dir.normalized, 100f, OtherMask);
-            lightTarget = _ligthHit.point;
-            if (_otherHit.transform != null)
+            _ligthHit = (RaycastHit2D)Physics2D.Raycast(raycastOrigin.transform.position, v, ViewDistance, LightMask);
+            if (_ligthHit.transform != null && _ligthHit.collider.tag == "Light")
             {
-                if (_otherHit.transform.tag == "Player")
+                Vector2 dir = (Vector2)Player.transform.position - _ligthHit.point;
+                _otherHit = (RaycastHit2D)Physics2D.Raycast(_ligthHit.point, dir.normalized, 100f, OtherMask);
+                lightTarget = _ligthHit.point;
+                if (_otherHit.transform != null)
                 {
-                    state = BehaviorState.Chase;
-                    playerTarget = _otherHit.point;
+                    if (_otherHit.transform.tag == "Player")
+                    {
+                        hit = true;
+                        playerTarget = _otherHit.point;
+                    }
                 }
             }
         }
-        else {
+
+        if (hit)
+        {
+            state = BehaviorState.Chase;
+        }
+        else
+        {
             state = BehaviorState.Search;
         }
-
-        _ligthHit = new RaycastHit2D();
-        _otherHit = new RaycastHit2D();
     }
 }
