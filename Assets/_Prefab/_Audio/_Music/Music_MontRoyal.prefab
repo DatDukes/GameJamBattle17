@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4853107795584470}
   - component: {fileID: 82243596740083096}
   m_Layer: 0
-  m_Name: Music_StadeOlympique
+  m_Name: Music_MontRoyal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: de060f9f57a236544a03b73c1d1c1aba, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4d28a76133d624d468f1731775cccc3e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
